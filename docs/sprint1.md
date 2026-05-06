@@ -18,23 +18,23 @@ Establish the core infrastructure and implement a minimum viable "Understanding 
 
 ### 2. Core Service Implementation
 
-- [ ] **VectorService**: Create a dedicated service to handle communication with Qdrant, supporting semantic similarity queries and payload filtering.
-- [ ] **LLMService**: Integrate `google-generativeai` to interface with Gemini 1.5 Pro/Flash for generating the `ReasoningChain`.
-- [ ] **ReasoningEngine (V1 Baseline)**: Implement the core logic flow:
+- [x] **VectorService**: Create a dedicated service to handle communication with Qdrant, supporting semantic similarity queries and payload filtering.
+- [x] **LLMService**: Integrate `google-generativeai` to interface with Gemini 1.5 Pro/Flash for generating the `ReasoningChain`.
+- [x] **ReasoningEngine (V1 Baseline)**: Implement the core logic flow:
     1. **Pruning**: Filter candidates using SQL based on `HardConstraints` (e.g., budget, mobility).
     2. **Semantic Alignment**: Rank remaining candidates using Qdrant similarity scores against the user's `Mood` and `Preferences`.
     3. **Synthesis**: Pass the top candidates to Gemini to generate the final personalized narrative.
 
 ### 3. API Hardening
 
-- [ ] **Endpoint Connectivity**: Fully wire the `POST /api/v1/recommendations` endpoint to the `ReasoningEngine`.
-- [ ] **Schema Validation**: Ensure all incoming `UserPersona` objects and outgoing `Recommendation` objects strictly adhere to Pydantic V2 schemas.
-- [ ] **Infrastructure Health Checks**: Implement a `/health` endpoint that verifies connectivity to PostgreSQL, Qdrant, Redis, and the LLM API.
+- [x] **Endpoint Connectivity**: Fully wire the `POST /api/v1/recommendations` endpoint to the `ReasoningEngine`.
+- [x] **Schema Validation**: Ensure all incoming `UserPersona` objects and outgoing `Recommendation` objects strictly adhere to Pydantic V2 schemas.
+- [x] **Infrastructure Health Checks**: Implement a `/health` endpoint that verifies connectivity to PostgreSQL, Qdrant, Redis, and the LLM API.
 
 ### 4. Signal Integration Prototype
 
-- [ ] **Mock Weather Signal**: Implement a simple background task or script that injects mock weather data into Redis.
-- [ ] **Environmental Awareness**: Modify the `ReasoningEngine` to penalize or prune destinations based on these mock signals (e.g., "Don't recommend beaches if signal says Storming").
+- [x] **Mock Weather Signal**: Implement a simple background task or script that injects mock weather data into Redis.
+- [x] **Environmental Awareness**: Modify the `ReasoningEngine` to penalize or prune destinations based on these mock signals (e.g., "Don't recommend beaches if signal says Storming").
 
 ---
 
