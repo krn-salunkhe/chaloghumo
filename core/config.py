@@ -37,6 +37,11 @@ class Settings(BaseSettings):
     
     # AI
     GOOGLE_API_KEY: str = ""
+    
+    # External APIs
+    OPENWEATHER_API_KEY: str = ""
+    AMADEUS_API_KEY: str = ""
+    GDELT_API_KEY: str = ""
 
     class Config:
         case_sensitive = True

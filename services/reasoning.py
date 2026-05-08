@@ -67,8 +67,16 @@ class ReasoningEngine:
         """
         Logic for Vector-based similarity search and ranking.
         """
-        # Placeholder for Qdrant search logic
-        return []
+        # Convert the user's mood/vibe into a vector
+        query_vector = await self.llm.generate_embedding(persona.mood or "travel")
+        
+        # Search the vector store
+        # If pool is empty, we search the entire collection. 
+        # If pool has candidates from _prune_candidates, we should ideally use them as filters,
+        # but for now, we'll perform a standard search.
+        results = await self.vector_store.search_by_vibe(query_vector=query_vector, limit=10)
+        
+        return results
 
     async def _apply_contextual_weights(self, candidates: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
@@ -90,7 +98,14 @@ class ReasoningEngine:
         return {
             "destination_id": "no-match",
             "match_score": 0.0,
-            "reasoning_chain": ["Unable to find a destination matching your constraints."],
+            "reasoning_chain": [
+                {
+                    "step_id": 1,
+                    "logic": "Unable to find a destination matching your constraints.",
+                    "domain": "System",
+                    "impact_weight": 0.0
+                }
+            ],
             "context_snapshot": {}
         }
 
